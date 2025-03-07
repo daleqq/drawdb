@@ -6,7 +6,10 @@ import { DB } from "../../data/constants";
 function parseType(field) {
   let res = field.type;
 
-  if (dbToTypes[DB.MSSQL][field.type].isSized) {
+  if (
+    dbToTypes[DB.MSSQL][field.type].isSized ||
+    dbToTypes[DB.MSSQL][field.type].hasPrecision
+  ) {
     res += `${field.size && field.size !== "" ? "(" + field.size + ")" : ""}`;
   }
 
